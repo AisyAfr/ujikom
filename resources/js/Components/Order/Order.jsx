@@ -11,6 +11,7 @@ const posts = [
         order_time: "order_time",
         status: "status",
     },
+    //comments
     // {customer_name : 'thoriq',
     // order_time :'08.00',
     // status: 'lunas'},
