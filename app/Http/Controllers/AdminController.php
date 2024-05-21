@@ -137,8 +137,18 @@ public function createkategori(Request $request)
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admin $admin)
+    public function destroy($id)
     {
-        //
+        try {
+            // Mencari pengguna berdasarkan ID
+            $userdelete = User::findOrFail($id);
+            // Menghapus pengguna
+            $userdelete->delete();
+
+            return redirect()->back()->with('success', 'Akun berhasil dihapus.');
+        } catch (\Exception $e) {
+            // Jika pengguna tidak ditemukan, kembalikan dengan pesan error
+            return redirect()->back()->with('error', 'Gagal menghapus akun.');
+        }
     }
 }

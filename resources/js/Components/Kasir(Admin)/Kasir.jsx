@@ -81,6 +81,19 @@ function Kasir({ users, onlykasir }) {
             Inertia.reload();
         });
     };
+
+
+    const handleDeleteKasir = (onlyKasirId) => {
+        if (window.confirm('Apakah Anda yakin ingin menghapus akun ini?')) {
+            Inertia.delete(`/admin/${onlyKasirId}`).then(() => {
+                // Me-refresh halaman untuk mendapatkan daftar produk terbaru
+                Inertia.reload();
+            });
+        }
+    };
+    
+
+
     return (
         <BodyLayout>
             <div className={`flex justify-center relative transition-all duration-1000 ${openModal ? 'translate-x-0 z-10' : '-translate-x-[2000px]'}`}>
@@ -132,8 +145,9 @@ function Kasir({ users, onlykasir }) {
                         <th></th>
                     </tr>
                     {onlykasir.map((onlykasir) => {
+                        console.log(onlykasir.id)
                         return (
-                            <tr className="h-fit border-bottom-1 border-x-[1px] border-gray-300 border-b-[1px]">
+                            <tr className="h-fit border-bottom-1 border-x-[1px] border-gray-300 border-b-[1px]" key={onlykasir.id}>
                                 <TableData text={onlykasir.first_name} />
                                 <TableData
                                     className={"hidden lg:table-cell"}
@@ -155,7 +169,7 @@ function Kasir({ users, onlykasir }) {
                                         </span>
                                     </button>
 
-                                    <button className="w-[100px] py-[7px] bg-[#E8E8E8] rounded-lg border-gray-400 border mr-2 flex max-xl:hidden justify-center">
+                                    <button onClick={() => handleDeleteKasir(onlykasir.id)} className="w-[100px] py-[7px] bg-[#E8E8E8] rounded-lg border-gray-400 border mr-2 flex max-xl:hidden justify-center" >
                                         <TrashSvg />
                                         <span className="opacity-60">
                                             | Hapus
