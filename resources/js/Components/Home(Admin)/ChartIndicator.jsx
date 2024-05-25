@@ -2,6 +2,7 @@ import React from 'react'
 
 function ChartIndicator() {
   return (
+    // inichartnya
     <div className="w-full h-full opacity-50 absolute bottom-0">
               <div className="w-full h-[20%] gap-x-[10px] flex items-end">
                 <p>100</p>
